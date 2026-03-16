@@ -7,7 +7,7 @@ import java.net.URL;
 public class Main {
     static public void main(String[] args) throws Exception {
         //create the url connection
-        URL url = new URL("https://query1.finance.yahoo.com/v8/finance/chart/NVDA");
+        URL url = new URL("https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=3m&interval=1d");
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
