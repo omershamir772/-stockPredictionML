@@ -3,32 +3,45 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Main {
-    static public void main(String[] args) throws Exception {
-        //create the url connection
-        URL url = new URL("https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=1y&interval=1d");
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
+    //this function uses both HttpURLConnection and java.net.URL to find the stocks data
+    public static String jsonReader() throws Exception {
 
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+            //this variable store the link for the api
+            URL url = new URL("https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=max&interval=1d");
 
-        //bufferread the stocks
-        BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            //create the url connection
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        String line;
-        String JsonStock = "";
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-        while ((line = read.readLine()) != null) {
-            JsonStock = line;
-        }
+            //bufferread the stocks
+            BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
+            String line;
+            String jsonStock = "";
+
+            while ((line = read.readLine()) != null) {
+                jsonStock = line;
+
+
+            }
+
+            read.close();
+
+            return jsonStock.toString();
+
+    }
+
+    public static void main(String[] args) throws Exception {
         try {
-            JSONObject jsonObject =  new JSONObject(JsonStock);
+            String jsonStock = jsonReader();
+            JSONObject jsonObject =  new JSONObject(jsonStock);
             JSONObject chart = jsonObject.getJSONObject("chart");
             JSONArray result = chart.getJSONArray("result");
             JSONObject result0 = result.getJSONObject(0);
@@ -55,12 +68,11 @@ public class Main {
             System.out.println(volumeArr);
             System.out.println(timestampArr);
 
+            //double[][] data =
+
         } catch (org.json.JSONException e) {
             e.printStackTrace();
         }
 
-
-
-        read.close();
     }
 }
