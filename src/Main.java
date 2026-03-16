@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Main {
@@ -28,10 +30,30 @@ public class Main {
         try {
             JSONObject jsonObject =  new JSONObject(JsonStock);
             JSONObject chart = jsonObject.getJSONObject("chart");
-            System.out.println(chart);
-            //int timestamp = jsonObject.getInt("timestamp");
-            //System.out.println(timestamp);
+            JSONArray result = chart.getJSONArray("result");
+            JSONObject result0 = result.getJSONObject(0);
+            //find the timestamp
+            JSONArray timestampArr = result0.getJSONArray("timestamp");
+            JSONObject indicators = result0.getJSONObject("indicators");
+            JSONArray quote = indicators.getJSONArray("quote");
+            JSONObject quote0 = quote.getJSONObject(0);
+            //find the open value
+            JSONArray openArr = quote0.getJSONArray("open");
+            //find the high value
+            JSONArray highArr = quote0.getJSONArray("high");
+            //find the low value
+            JSONArray lowArr = quote0.getJSONArray("low");
+            //find the close value
+            JSONArray closeArr = quote0.getJSONArray("close");
+            //find the volume value
+            JSONArray volumeArr = quote0.getJSONArray("volume");
 
+            System.out.println(openArr);
+            System.out.println(highArr);
+            System.out.println(lowArr);
+            System.out.println(closeArr);
+            System.out.println(volumeArr);
+            System.out.println(timestampArr);
 
         } catch (org.json.JSONException e) {
             e.printStackTrace();
