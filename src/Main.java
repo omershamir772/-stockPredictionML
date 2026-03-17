@@ -22,7 +22,7 @@ public class Main {
     public static String jsonReader() throws Exception {
 
             //this variable store the link for the api
-            URL url = new URL("https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=max&interval=1d");
+            URL url = new URL("https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=max&interval=1d"); //this api stores the information from the past to the future
 
             //create the url connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -130,6 +130,31 @@ public class Main {
         } catch (org.json.JSONException e) {
             //print the error
             e.printStackTrace();
+        }
+    }
+
+    //this public variable is a 2d array used to create the dataset
+    public static int[][][] dataset = new int[2 * (openArr.length() - 30)][5][1];
+
+    //this function will be used to generate the dataset
+    public static void generateDataset() {
+
+        //those two for loop is used to create the data set
+        for (int i = 0; i <= 1; i++) { // i = 0 --> input_data; i = 1 --> output_data;
+
+            for (int j = 0; j <= openArr.length(); j++) {
+
+                for (int k = 0; k <= 5; k++) { // k = 0 --> openArr; k = 1 --> highArr; k = 2 --> lowArr; k = 3 --> closeArr; k = 4 --> volumeArr; k = 5 --> timestampArr;
+
+                    //this switch&case statement that will check from which variable we should get the data
+                    switch (k) {
+
+                        //check if k equals to 0
+                        case k = 0:
+                            dataset[i][j][k] = ;
+                    }
+                }
+            }
         }
     }
 
