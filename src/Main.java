@@ -72,19 +72,34 @@ public class Main {
     //create a public array that will store the time stamp of the stock value
     public static JSONArray timestampArr;
 
-    //create the main function
-    public static void main(String[] args) throws Exception {
+    //this function is used to convert the JSON file style of writing into string arrays to make them usable for the neural network
+    public static void JSONtoString(String jsonStock) throws Exception{
+
+            //create a try&catch statement
         try {
-            String jsonStock = jsonReader();
+
+            //read the JSON file data from the api
             JSONObject jsonObject =  new JSONObject(jsonStock);
+
+            //sort the JSON file into result
             JSONObject chart = jsonObject.getJSONObject("chart");
+
+            //sort the JSON file into result
             JSONArray result = chart.getJSONArray("result");
+
+            //create an object
             JSONObject result0 = result.getJSONObject(0);
 
             //find the timestamp
             timestampArr = result0.getJSONArray("timestamp");
+
+            //sort the JSON file data into indicators
             JSONObject indicators = result0.getJSONObject("indicators");
+
+            //sort the JSON file data into quote
             JSONArray quote = indicators.getJSONArray("quote");
+
+            //create an object
             JSONObject quote0 = quote.getJSONObject(0);
 
             //find the open value
@@ -102,6 +117,7 @@ public class Main {
             //find the volume value
             volumeArr = quote0.getJSONArray("volume");
 
+            //print the data
             System.out.println(openArr);
             System.out.println(highArr);
             System.out.println(lowArr);
@@ -109,11 +125,21 @@ public class Main {
             System.out.println(volumeArr);
             System.out.println(timestampArr);
 
-            //double[][] data =
 
+        //catch any errors in the process
         } catch (org.json.JSONException e) {
+            //print the error
             e.printStackTrace();
         }
+    }
+
+    //create the main function
+    public static void main(String[] args) throws Exception {
+        //read the JSON file data
+        String jsonStock = jsonReader();
+
+        //convert the JSON file data into usable arrays
+        JSONtoString(jsonStock);
 
     }
 }
