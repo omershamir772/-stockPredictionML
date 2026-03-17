@@ -1,11 +1,21 @@
 //import libraries
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
+//import the java.io.BufferedReader to read files
+import java.io.BufferedReader;
+
+//import the java.io.InputStreamReader to read from the api
+import java.io.InputStreamReader;
+
+//import java.net.HttpURLConnection to create user agent
+import java.net.HttpURLConnection;
+
+//import java.net.URL to read the link
+import java.net.URL;
+
+//import java.net.URL to read the link
+import org.json.*;
+
+//create a public class Main
 public class Main {
 
     //this function uses both HttpURLConnection and java.net.URL to find the stocks data
@@ -17,27 +27,52 @@ public class Main {
             //create the url connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+            //create an agent thht will read the data
             conn.setRequestMethod("GET");
             conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-            //bufferread the stocks
+            //read the data from the api
             BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
+            //create a string that will one line per time store the JSON file data
             String line;
+
+            //create a string that will store the JSON file data
             String jsonStock = "";
 
+            //read all the lines and store them js
             while ((line = read.readLine()) != null) {
                 jsonStock = line;
 
 
             }
 
+            //close the object that read data from the api
             read.close();
 
+            //return the data
             return jsonStock.toString();
 
     }
+    //create a public array that will store the open prices of the stock
+    public static JSONArray openArr;
 
+    //create a public array that will store the highest prices of the stock
+    public static JSONArray highArr;
+
+    //create a public array that will store the lower prices of the stock
+    public static JSONArray lowArr;
+
+    //create a public array that will store the close prices of the stock
+    public static JSONArray closeArr;
+
+    //create a public array that will store the volume of the stock
+    public static JSONArray volumeArr;
+
+    //create a public array that will store the time stamp of the stock value
+    public static JSONArray timestampArr;
+
+    //create the main function
     public static void main(String[] args) throws Exception {
         try {
             String jsonStock = jsonReader();
@@ -45,21 +80,27 @@ public class Main {
             JSONObject chart = jsonObject.getJSONObject("chart");
             JSONArray result = chart.getJSONArray("result");
             JSONObject result0 = result.getJSONObject(0);
+
             //find the timestamp
-            JSONArray timestampArr = result0.getJSONArray("timestamp");
+            timestampArr = result0.getJSONArray("timestamp");
             JSONObject indicators = result0.getJSONObject("indicators");
             JSONArray quote = indicators.getJSONArray("quote");
             JSONObject quote0 = quote.getJSONObject(0);
+
             //find the open value
-            JSONArray openArr = quote0.getJSONArray("open");
+            openArr = quote0.getJSONArray("open");
+
             //find the high value
-            JSONArray highArr = quote0.getJSONArray("high");
+            highArr = quote0.getJSONArray("high");
+
             //find the low value
-            JSONArray lowArr = quote0.getJSONArray("low");
+            lowArr = quote0.getJSONArray("low");
+
             //find the close value
-            JSONArray closeArr = quote0.getJSONArray("close");
+            closeArr = quote0.getJSONArray("close");
+
             //find the volume value
-            JSONArray volumeArr = quote0.getJSONArray("volume");
+            volumeArr = quote0.getJSONArray("volume");
 
             System.out.println(openArr);
             System.out.println(highArr);
