@@ -1,2 +1,2 @@
 # -stockPredictionML
-!(General Simplified Architecture.drawio)[docs/General Simplified Architecture.drawio.png)
+!(General Simplified Architecture)[docs/General Simplified Architecture.drawio.png)
