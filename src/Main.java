@@ -12,7 +12,10 @@ import java.net.HttpURLConnection;
 //import java.net.URL to read the link
 import java.net.URL;
 
-//import java.net.URL to read the link
+//import java.util.Arrays to print arrays
+import java.util.Arrays;
+
+//import org.json.* to read the JSON string
 import org.json.*;
 
 //create a public class Main
@@ -133,29 +136,59 @@ public class Main {
         }
     }
 
-    //this public variable is a 2d array used to create the dataset
-    public static int[][][] dataset = new int[2 * (openArr.length() - 30)][5][1];
+    //this public variable is a 2d array that will be used as the input data
+    //public static int[][] inputData = new int[2 * (openArr.length() - 30)][5];
 
     //this function will be used to generate the dataset
-    public static void generateDataset() {
+    public static int[][] generateDataset() throws Exception {
 
-        //those two for loop is used to create the data set
-        for (int i = 0; i <= 1; i++) { // i = 0 --> input_data; i = 1 --> output_data;
+        //this variable is a 2d array which will be used as the dataset
+        int[][] dataset = new int[2 * (openArr.length() - 30)][6];
 
-            for (int j = 0; j <= openArr.length(); j++) {
+        //those two for loops is used to create the dataset
+        for (int i = 0; i <= openArr.length(); i++) {
 
-                for (int k = 0; k <= 5; k++) { // k = 0 --> openArr; k = 1 --> highArr; k = 2 --> lowArr; k = 3 --> closeArr; k = 4 --> volumeArr; k = 5 --> timestampArr;
-
-                    //this switch&case statement that will check from which variable we should get the data
-                    switch (k) {
-
-                        //check if k equals to 0
-                        case k = 0:
-                            dataset[i][j][k] = ;
-                    }
-                }
+            //use an if statement to check if i + 30 exist
+            if (i + 30 >= openArr.length() || openArr.isNull(i + 30)) {
+                break;
             }
+
+            for (int k = 0; k <= 5; k++) { // k = 0 --> openArr; k = 1 --> highArr; k = 2 --> lowArr; k = 3 --> closeArr; k = 4 --> volumeArr; k = 5 --> timestampArr;
+
+                //this switch&case statement that will check from which variable we should get the data
+                switch (k) {
+
+                    //check if k equals to 0 --> openArr
+                    case 0:
+                        dataset[i][k] = openArr.getInt(i + 30); //in case k == 0 s
+                    //check if k equals to 1 --> highArr
+                    case 1:
+                        dataset[i][k] = highArr.getInt(i + 30); //in case k == 0 s
+                    //check if k equals to 2 --> lowArr
+                    case 2:
+                        dataset[i][k] = lowArr.getInt(i + 30); //in case k == 0 s
+                    //check if k equals to 3 --> closeArr
+                    case 3:
+                        dataset[i][k] = closeArr.getInt(i + 30); //in case k == 0 s
+                    //check if k equals to 4 --> volumeArr
+                    case 4:
+                        dataset[i][k] = volumeArr.getInt(i + 30); //in case k == 0 s
+                    //check if k equals to 5 --> timestampArr
+                    case 5:
+                        dataset[i][k] = timestampArr.getInt(i + 30); //in case k == 0 s
+                }
+
+
+
+
+            }
+
         }
+        //printing the data
+        System.out.println(Arrays.deepToString(dataset));
+
+        //return dataset
+        return dataset;
     }
 
     //create the main function
@@ -165,6 +198,9 @@ public class Main {
 
         //convert the JSON file data into usable arrays
         JSONtoString(jsonStock);
+
+        //generate dataset
+        int[][] dataset = generateDataset();
 
     }
 }
