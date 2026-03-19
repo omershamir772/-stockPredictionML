@@ -136,8 +136,6 @@ public class Main {
         }
     }
 
-    //this public variable is a 2d array that will be used as the input data
-    //public static int[][] inputData = new int[2 * (openArr.length() - 30)][5];
 
     //this function will be used to generate the dataset
     public static int[][] generateDataset() throws Exception {
@@ -191,6 +189,49 @@ public class Main {
         return dataset;
     }
 
+    //this function
+    public static int[][] generateInputData() throws Exception {
+        //this variable is a 2d array that will be used as the input data
+        int[][] inputData = new int[2 * (openArr.length() - 30)][6];
+
+        //those two for loops is used to create the input data
+        for (int i = 0; i <= openArr.length() - 30; i++) {
+
+            for (int k = 0; k <= 6; k++) { // k = 0 --> openArr; k = 1 --> highArr; k = 2 --> lowArr; k = 3 --> closeArr; k = 4 --> volumeArr; k = 5 --> timestampArr;
+
+                //this switch&case statement that will check from which variable we should get the data
+                switch (k) {
+
+                    //check if k equals to 0 --> openArr
+                    //check if k equals to 1 --> highArr
+                    case 0:
+                        inputData[i][k] = openArr.getInt(i); //in case k == 0 s
+                        //check if k equals to 1 --> highArr
+                    case 1:
+                        inputData[i][k] = highArr.getInt(i); //in case k == 0 s
+                        //check if k equals to 2 --> lowArr
+                    case 2:
+                        inputData[i][k] = lowArr.getInt(i); //in case k == 0 s
+                        //check if k equals to 3 --> closeArr
+                    case 3:
+                        inputData[i][k] = closeArr.getInt(i); //in case k == 0 s
+                        //check if k equals to 4 --> volumeArr
+                    case 4:
+                        inputData[i][k] = volumeArr.getInt(i); //in case k == 0 s
+                        //check if k equals to 5 --> timestampArr
+                    case 5:
+                        inputData[i][k] = timestampArr.getInt(i); //in case k == 0 s
+                }
+
+            }
+
+        }
+        //print data
+        System.out.println(Arrays.deepToString(inputData));
+        //return input data
+        return inputData;
+    }
+
     //create the main function
     public static void main(String[] args) throws Exception {
         //read the JSON file data
@@ -201,6 +242,10 @@ public class Main {
 
         //generate dataset
         int[][] dataset = generateDataset();
+
+
+        //generate input data
+        int[][] inputData = generateInputData();
 
     }
 }
