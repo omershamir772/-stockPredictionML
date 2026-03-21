@@ -1,5 +1,7 @@
+//import libraries
 import java.util.Arrays;
 
+//create the public static class
 public class data {
 
     //this function will be used to generate the dataset
