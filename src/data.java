@@ -8,13 +8,13 @@ public class data {
     public static int[][] generateDataset() throws Exception {
 
         //this variable is a 2d array which will be used as the dataset
-        int[][] dataset = new int[2 * (api.openArr.length() - 30)][6];
+        int[][] dataset = new int[2 * (api.dataLength - 30)][6];
 
         //those two for loops is used to create the dataset
-        for (int i = 0; i <= api.openArr.length(); i++) {
+        for (int i = 0; i <= api.dataLength; i++) {
 
             //use an if statement to check if i + 30 exist
-            if (i + 30 >= api.openArr.length() || api.openArr.isNull(i + 30)) {
+            if (i - 30 >= api.dataLength || api.openArr.isNull(i + 30)) {
                 break;
             }
 
@@ -59,10 +59,10 @@ public class data {
     //this function
     public static int[][] generateInputData() throws Exception {
         //this variable is a 2d array that will be used as the input data
-        int[][] inputData = new int[2 * (api.openArr.length() - 30)][6];
+        int[][] inputData = new int[2 * (api.dataLength)][6];
 
         //those two for loops is used to create the input data
-        for (int i = 0; i <= api.openArr.length() - 30; i++) {
+        for (int i = 0; i <= api.dataLength; i++) {
 
             for (int k = 0; k <= 6; k++) { // k = 0 --> openArr; k = 1 --> highArr; k = 2 --> lowArr; k = 3 --> closeArr; k = 4 --> volumeArr; k = 5 --> timestampArr;
 
@@ -73,6 +73,7 @@ public class data {
                     //check if k equals to 1 --> highArr
                     case 0:
                         inputData[i][k] = api.openArr.getInt(i); //in case k == 0 s
+
                         //check if k equals to 1 --> highArr
                     case 1:
                         inputData[i][k] = api.highArr.getInt(i); //in case k == 0 s

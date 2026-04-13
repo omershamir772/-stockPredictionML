@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 public class api {
     //this function uses both HttpURLConnection and java.net.URL to find the stocks data
@@ -61,6 +62,9 @@ public class api {
     //create a public array that will store the time stamp of the stock value
     public static JSONArray timestampArr;
 
+    //create a public int that will store the length of the data
+    public static int dataLength;
+
     //this function is used to convert the JSON file style of writing into string arrays to make them usable for the neural network
     public static void JSONtoString(String jsonStock) throws Exception{
 
@@ -114,6 +118,24 @@ public class api {
             System.out.println(volumeArr);
             System.out.println(timestampArr);
 
+            //check if the length is equal
+            boolean is_length_equal = Objects.equals(openArr.length(), highArr.length())
+                    && Objects.equals(lowArr.length(), closeArr.length())
+                    && Objects.equals(volumeArr.length(), timestampArr.length());
+
+            //create an if&else statement that checks if is_length_equal true
+            if (is_length_equal) {
+                //use the dataLength variable
+                dataLength = openArr.length();
+            }
+
+            else {
+                System.out.println("the data doesn't have the same length check the line between 121 - 134 or the api");
+            }
+
+
+            //print boolean
+            System.out.println(is_length_equal);
 
             //catch any errors in the process
         } catch (org.json.JSONException e) {
