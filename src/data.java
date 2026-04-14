@@ -8,7 +8,7 @@ public class data {
     public static int[][] generateDataset() throws Exception {
 
         //this variable is a 2d array which will be used as the dataset
-        int[][] dataset = new int[2 * (api.dataLength - 30)][6];
+        int[][] dataset = new int[2 * (api.dataLength + 30)][6];
 
         //those two for loops is used to create the dataset
         for (int i = 0; i <= api.dataLength; i++) {
@@ -25,22 +25,33 @@ public class data {
 
                     //check if k equals to 0 --> openArr
                     case 0:
-                        dataset[i][k] = api.openArr.getInt(i + 30); //in case k == 0 s
+                        dataset[i][k] = api.openArr.getInt(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 1 --> highArr
                     case 1:
-                        dataset[i][k] = api.highArr.getInt(i + 30); //in case k == 0 s
+                        dataset[i][k] = api.highArr.getInt(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 2 --> lowArr
                     case 2:
-                        dataset[i][k] = api.lowArr.getInt(i + 30); //in case k == 0 s
+                        dataset[i][k] = api.lowArr.getInt(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 3 --> closeArr
                     case 3:
-                        dataset[i][k] = api.closeArr.getInt(i + 30); //in case k == 0 s
+                        dataset[i][k] = api.closeArr.getInt(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 4 --> volumeArr
                     case 4:
-                        dataset[i][k] = api.volumeArr.getInt(i + 30); //in case k == 0 s
+                        dataset[i][k] = api.volumeArr.getInt(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 5 --> timestampArr
                     case 5:
-                        dataset[i][k] = api.timestampArr.getInt(i + 30); //in case k == 0 s
+                        dataset[i][k] = api.timestampArr.getInt(i); //in case k == 0 s
+                        break; //break
                 }
 
 
@@ -57,12 +68,12 @@ public class data {
     }
 
     //this function
-    public static int[][] generateInputData() throws Exception {
+    public static double[][] generateInputData() throws Exception {
         //this variable is a 2d array that will be used as the input data
-        int[][] inputData = new int[2 * (api.dataLength)][6];
+        double[][] inputData = new double[api.dataLength][6];
 
         //those two for loops is used to create the input data
-        for (int i = 0; i <= api.dataLength; i++) {
+        for (int i = 0; i <= api.dataLength - 1; i++) {
 
             for (int k = 0; k <= 6; k++) { // k = 0 --> openArr; k = 1 --> highArr; k = 2 --> lowArr; k = 3 --> closeArr; k = 4 --> volumeArr; k = 5 --> timestampArr;
 
@@ -72,23 +83,33 @@ public class data {
                     //check if k equals to 0 --> openArr
                     //check if k equals to 1 --> highArr
                     case 0:
-                        inputData[i][k] = api.openArr.getInt(i); //in case k == 0 s
+                        inputData[i][k] = api.openArr.getDouble(i); //in case k == 0 s
+                        break; //break
 
                         //check if k equals to 1 --> highArr
                     case 1:
-                        inputData[i][k] = api.highArr.getInt(i); //in case k == 0 s
+                        inputData[i][k] = api.highArr.getDouble(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 2 --> lowArr
                     case 2:
-                        inputData[i][k] = api.lowArr.getInt(i); //in case k == 0 s
+                        inputData[i][k] = api.lowArr.getDouble(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 3 --> closeArr
                     case 3:
-                        inputData[i][k] = api.closeArr.getInt(i); //in case k == 0 s
+                        inputData[i][k] = api.closeArr.getDouble(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 4 --> volumeArr
                     case 4:
-                        inputData[i][k] = api.volumeArr.getInt(i); //in case k == 0 s
+                        inputData[i][k] = api.volumeArr.getDouble(i); //in case k == 0 s
+                        break; //break
+
                         //check if k equals to 5 --> timestampArr
                     case 5:
-                        inputData[i][k] = api.timestampArr.getInt(i); //in case k == 0 s
+                        inputData[i][k] = api.timestampArr.getDouble(i); //in case k == 0 s
+                        break; //break
                 }
 
             }

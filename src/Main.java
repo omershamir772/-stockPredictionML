@@ -16,6 +16,6 @@ public class Main {
 
 
         //generate input data
-        int[][] inputData = data.generateInputData();
+        double[][] inputData = data.generateInputData();
     }
 }
