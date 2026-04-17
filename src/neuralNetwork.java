@@ -1,5 +1,4 @@
 
-
 //create a public class neuralNetwork
 public class neuralNetwork {
 

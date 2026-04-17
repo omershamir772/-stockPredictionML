@@ -12,7 +12,7 @@ public class Main {
         api.JSONtoString(jsonStock);
 
         //generate dataset
-        int[][] dataset = data.generateDataset();
+        double[][] dataset = data.generateDataset();
 
 
         //generate input data

@@ -28,11 +28,11 @@ public class api {
         String line;
 
         //create a string that will store the JSON file data
-        String jsonStock = "";
+        StringBuilder jsonStock = new StringBuilder();
 
         //read all the lines and store them js
         while ((line = read.readLine()) != null) {
-            jsonStock = line;
+            jsonStock.append(line);
 
 
         }
@@ -68,9 +68,7 @@ public class api {
     //this function is used to convert the JSON file style of writing into string arrays to make them usable for the neural network
     public static void JSONtoString(String jsonStock) throws Exception{
 
-        //create a try&catch statement
         try {
-
             //read the JSON file data from the api
             JSONObject jsonObject =  new JSONObject(jsonStock);
 
